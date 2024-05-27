@@ -24,9 +24,9 @@ typedef struct {
 typedef struct {
   char unk210[210]; /* skip the first 210 elements of the struct */
   char *m_target;
-  int m_iMaxHealth; /* 224 */
-  int m_iHealth;    /* 228 */
-  int m_fFlags;     /* 232 */
+  int m_iMaxHealth; /* 0xD8 */
+  int m_iHealth;    /* 0xDC */
+  int m_fFlags;     /* 0xE0 */
   char unk236[8];   /* skip the next 8 elements of the struct */
   float unk[3];     /* 244 */
 

@@ -47,7 +47,7 @@ void openGame(Game *game, char *name) {
 
   /* @TODO: replace with sigs */
   game->Offsets = (Offsets){
-      0x00ED93E8, /* LPlr Addr | (c2ce13e8 | xx?x) */
+      0x00EDB3E8, /* LPlr Addr | (c2ce13e8 | xx?x) */
       0x7EE069,   /* Glow Addr */
       0x7F3E75    /* Boom Addr */
   };
