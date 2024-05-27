@@ -56,7 +56,7 @@ static void *mainThread(void *_) {
       continue;
 
     if ((game.Options.Bhop) &&
-        (game.Player.m_fFlags == 131 || game.Player.m_fFlags == 643)) {
+        (game.Player.m_fFlags == 129 || game.Player.m_fFlags == 641)) {
 
       /* Add some random noise to try throwing off anticheats */
       if (!game.Options.BhopDelay || rand() % 50 <= 10)
