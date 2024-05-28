@@ -6,7 +6,7 @@ all: $(TARGET)
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $+
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $+ -lX11 -lXtst
 
 install: all
 	mkdir -p $(DIR)

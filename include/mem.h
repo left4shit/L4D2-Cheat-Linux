@@ -8,6 +8,9 @@
 #define _MEM_H
 
 #include <sys/types.h>
+#include <stdint.h>
+#include <string>
+#include <vector>
 
 typedef union {
   long val;                 /* Instructions as a number  */
@@ -24,5 +27,7 @@ char readAddr(pid_t, u_int32_t, void *, size_t);
 u_int32_t ScanAddr(u_int32_t, u_int32_t, char *, char *, size_t);
 /* Write func (/proc/pid/mem), values */
 char writeAddr(pid_t, u_int32_t, void *, size_t);
+u_int32_t sigScan(pid_t pid, u_int32_t start, u_int32_t end, std::string signature);
+void parsePattern(const std::string& patternStr, std::vector<char>& bytePattern, std::vector<char>& mask);
 
 #endif /* _MEM_H */

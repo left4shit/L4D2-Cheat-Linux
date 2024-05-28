@@ -50,6 +50,21 @@ Add CC='cc' to change the compiler.
 
 Add DIR='/usr/local/sbin' to change the install location. (uninstall must use the same thing)
 
+#### Troubleshooting
+If you run into
+
+```
+/usr/bin/ld: skipping incompatible /usr/lib/x86_64-linux-gnu/libXtst.so when searching for -lXtst
+/usr/bin/ld: skipping incompatible /usr/lib/x86_64-linux-gnu/libXtst.a when searching for -lXtst
+/usr/bin/ld: cannot find -lXtst: No such file or directory
+/usr/bin/ld: skipping incompatible /usr/lib/x86_64-linux-gnu/libXtst.so when searching for -lXtst
+```
+Fix it by running
+
+```
+sudo apt-get install libxtst-dev:i386
+```
+
 ## Thanks to
 - [Helped with offsets](https://github.com/StrafeTx)
 - [Moral support / Helped figure out the hellscape of ptrace](https://github.com/StrafeReaver)

@@ -20,7 +20,6 @@ CPPFLAGS += -DVERSION=\"$(VERSION)\"
 CFLAGS   += -m32 \
             -pedantic \
             -Wall \
-            -Werror \
             -Wextra \
             -Wno-deprecated-declarations \
             -Iinclude \

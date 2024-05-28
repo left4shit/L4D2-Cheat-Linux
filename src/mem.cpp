@@ -11,6 +11,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
 
 #include <sys/ptrace.h>
 #include <sys/wait.h>
@@ -125,4 +129,75 @@ char writeAddr(pid_t pid, u_int32_t addr, void *buf, size_t size) {
 
   close(fd);
   return ret;
+}
+
+u_int32_t sigScan(pid_t pid, u_int32_t start, u_int32_t end, std::string signature) {
+    std::vector<char> bytePattern;
+    std::vector<char> mask;
+    parsePattern(signature, bytePattern, mask);
+
+    // Attach to the target process
+    if (ptrace(PTRACE_ATTACH, pid, NULL, NULL) == -1) {
+        perror("ptrace attach");
+        return -1;
+    }
+
+    // Wait for the target process to stop
+    waitpid(pid, NULL, 0);
+
+    size_t patternLen = strlen(mask.data());
+
+    // Try all possible starting addresses
+    for (u_int32_t addr = start; addr < end; addr += 1) {
+        bool match = true;
+
+        // Read memory from the target process
+        pokeData data;
+        for (size_t i = 0; i < patternLen; i += sizeof(long)) {
+
+          // Reads the word at addr + i
+          data.val = ptrace(PTRACE_PEEKDATA, pid, addr + i, NULL);
+
+          // Compare the read data with the pattern
+          for (size_t j = 0; j < sizeof(long); ++j) {
+              if (mask[i + j] != '?' && bytePattern.data()[i + j] != data.chars[j]) {
+                match = false;
+                break;
+              }
+          }
+          if (!match) {
+              break;  // Break out if not a match
+          }
+        }
+
+        if (match) {
+            ptrace(PTRACE_DETACH, pid, NULL, NULL);
+            return addr;
+        }
+    }
+
+    // Detach from the target process
+    ptrace(PTRACE_DETACH, pid, NULL, NULL);
+
+    return -1; // Pattern not found
+}
+
+/**
+ * Takes a IDA formatted pattern string, and fills a char vector and mask with it's byte representation
+*/
+void parsePattern(const std::string& patternStr, std::vector<char>& bytePattern, std::vector<char>& mask) {
+  std::istringstream iss(patternStr);
+  std::string token;
+  while (std::getline(iss, token, ' ')) {
+      if (token == "??") {
+          bytePattern.push_back(0x0);
+          mask.push_back('?');
+      } else {
+          std::stringstream ss(token);
+          int byte;
+          ss >> std::hex >> byte;
+          bytePattern.push_back(static_cast<char>(byte));
+          mask.push_back('x');
+      }
+  }
 }
