@@ -29,12 +29,12 @@ CFLAGS   += -std=c99 \
             -Iinclude \
             $(CPPFLAGS)
 
-SRC := src/commands.c \
-       src/game.c \
-       src/handler.c \
-       src/keyboard.c \
-       src/main.c \
-       src/mem.c \
-       src/utils.c
+SRC := src/commands.cpp \
+       src/game.cpp \
+       src/handler.cpp \
+       src/keyboard.cpp \
+       src/main.cpp \
+       src/mem.cpp \
+       src/utils.cpp
 
-OBJ := $(SRC:.c=.o)
+OBJ := $(SRC:.cpp=.o)

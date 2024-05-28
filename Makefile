@@ -2,7 +2,7 @@ include config.mk
 
 all: $(TARGET)
 
-.c.o:
+.cpp.o:
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(TARGET): $(OBJ)
