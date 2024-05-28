@@ -17,15 +17,12 @@ endif
 
 LDFLAGS  := -pthread
 CPPFLAGS += -DVERSION=\"$(VERSION)\"
-CFLAGS   += -std=c99 \
-            -m32 \
+CFLAGS   += -m32 \
             -pedantic \
             -Wall \
             -Werror \
             -Wextra \
             -Wno-deprecated-declarations \
-            -Wmissing-prototypes \
-            -Wold-style-definition \
             -Iinclude \
             $(CPPFLAGS)
 

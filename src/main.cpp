@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <string>
 
 static Game game;
 static void *mainThread(void *);
@@ -21,9 +22,9 @@ int main(void) {
   char str[1024];
 
   if (getuid() != 0)
-    die("You must run this program as root");
+    die(std::string("You must run this program as root").data());
 
-  openGame(&game, "hl2_linux");
+  openGame(&game, std::string("hl2_linux").data());
   pthread_create(&threadID, NULL, mainThread, NULL);
 
   while (1) {
@@ -43,10 +44,10 @@ static void *mainThread(void *_) {
   srand(time(NULL));
 
   if ((keyF = openKeyboard()) == -1)
-    die("Could not open the input device");
+    die(std::string("Could not open the input device").data());
 
   if ((uinputF = openUinputKeyboard()) == -1)
-    die("Could not open /dev/uinput");
+    die(std::string("Could not open /dev/uinput").data());
 
   while (checkGame(game.pid) != -1) {
     if ((key = getInput(keyF)) != -1)
@@ -55,17 +56,17 @@ static void *mainThread(void *_) {
     if (playerFound(&game) == -1)
       continue;
 
-    if ((game.Options.Bhop) &&
-        (game.Player.m_fFlags == 129 || game.Player.m_fFlags == 641)) {
+    if ((game.options.Bhop) &&
+        (game.player.m_fFlags == 129 || game.player.m_fFlags == 641)) {
 
       /* Add some random noise to try throwing off anticheats */
-      if (!game.Options.BhopDelay || rand() % 50 <= 10)
+      if (!game.options.BhopDelay || rand() % 50 <= 10)
         sendInput(uinputF, 57); /* KEY_SPACE */
     }
 
     sleep(0);
   }
 
-  die("Game not running");
+  die(std::string("Game not running").data());
   return NULL;
 }

@@ -41,9 +41,9 @@ typedef struct {
   u_int32_t EngineModule;    /* engine.so */
   u_int32_t EngineModuleEnd; /* engine.so end */
 
-  Offsets Offsets; /* Game offsets */
-  Options Options; /* Cheat options */
-  Player Player;   /* The player struct */
+  Offsets offsets; /* Game offsets */
+  Options options; /* Cheat options */
+  Player player;   /* The player struct */
 } Game;
 
 /* Check if the game is running */

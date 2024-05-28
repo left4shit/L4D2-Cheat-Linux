@@ -10,7 +10,7 @@
 #include "game.h"
 
 /* Func definition of a command */
-typedef void (*cmdfunc)(Game *, char **restrict);
+typedef void (*cmdfunc)(Game *, char **);
 typedef struct {
   const char *name; /* Name of a command */
   cmdfunc func;     /* Func of a command */
@@ -24,10 +24,10 @@ typedef struct {
 } Toggle;
 
 /* Checks & runs a command with the split arguments */
-void executeCommand(Game *restrict, char *restrict);
+void executeCommand(Game *, char *);
 /* Handle key presses to make hotkeys */
-void handleInput(Game *restrict, int);
+void handleInput(Game *, int);
 /* Split stdin into a command + arguments */
-char **splitArguments(char *restrict);
+char **splitArguments(char *);
 
 #endif /* _HANDLER_H */

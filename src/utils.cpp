@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 
 /* print then exit the program */
 void die(char *str) {
@@ -26,7 +27,7 @@ pid_t findPid(char *name) {
   char fName[FILENAME_MAX], buf[256];
 
   if ((dir = opendir("/proc")) == NULL)
-    die("Could not open /proc directory");
+    die(std::string("Could not open /proc directory").data());
 
   while ((de = readdir(dir)) != NULL) {
     if ((pid = atoi(de->d_name)) == 0)

@@ -24,7 +24,7 @@ static Toggle Toggles[] = {
 };
 
 /* Checks & runs a command with the split arguments */
-void executeCommand(Game *restrict game, char *restrict str) {
+void executeCommand(Game * game, char * str) {
   int i;
   char **args = splitArguments(str);
 
@@ -41,7 +41,7 @@ void executeCommand(Game *restrict game, char *restrict str) {
 }
 
 /* Handle key presses to make hotkeys */
-void handleInput(Game *restrict game, int key) {
+void handleInput(Game * game, int key) {
   int i;
 
   for (i = 0; Toggles[i].func != 0; i++) {
@@ -55,8 +55,8 @@ void handleInput(Game *restrict game, int key) {
 }
 
 /* Split stdin into a command + arguments */
-char **splitArguments(char *restrict str) {
-  char **ret = malloc(8);
+char **splitArguments(char * str) {
+  char **ret = (char **)malloc(8);
   char *ptr = strtok(str, " ");
   int i;
 

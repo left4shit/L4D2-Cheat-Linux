@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <string>
 
 #include <linux/uinput.h> /* TODO: remove this */
 
@@ -36,7 +37,7 @@ int openKeyboard(void) {
   char *ptr;
 
   if ((f = fopen("/proc/bus/input/devices", "r")) == NULL)
-    die("Could not open /proc/bus/input/devices");
+    die(std::string("Could not open /proc/bus/input/devices").data());
 
   while (fgets(buf, sizeof(buf), f)) {
     if ((ptr = strstr(buf, "Handlers="))) {
@@ -62,7 +63,7 @@ int openKeyboard(void) {
 /* Creates a virtual device */
 /* @TODO Support Alpine Linux */
 int openUinputKeyboard(void) {
-  struct uinput_setup usetup = {0};
+  struct uinput_setup usetup;
   int uinputF = -1;
 
   if ((uinputF = open("/dev/uinput", O_WRONLY | O_NONBLOCK)) == -1)

@@ -10,12 +10,12 @@
 #include "game.h"
 
 /* Handle the bhop hotkey */
-void toggleBhop(Game *restrict, char);
+void toggleBhop(Game *, char);
 /* Handle the bhopdelay command */
-void bhopDelay(Game *restrict, char **restrict);
+void bhopDelay(Game *, char **);
 /* Handle the glow command */
-void toggleEsp(Game *, char **restrict);
+void toggleEsp(Game *, char **);
 /* Handle the noboom command */
-void toggleNoBoom(Game *, char **restrict);
+void toggleNoBoom(Game *, char **);
 
 #endif /* _COMMANDS_H */
