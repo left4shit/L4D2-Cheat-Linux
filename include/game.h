@@ -12,6 +12,7 @@
 typedef struct {
   u_int32_t PlayerAddr; /* The static address of the LocalPlayer */
   u_int32_t GlowAddr;   /* The static address of where to nop for Glow */
+  u_int32_t InfectedGlowAddr;   /* The static address of where to nop for Infected Glow */
   u_int32_t BoomAddr;   /* The static address of where to nop for Noboom */
 } Offsets;
 

@@ -31,10 +31,12 @@ void toggleEsp(Game *game, char ** args) {
   const char *REV = "\x0F\x83\xD1\x01\x00\x00\xFF\x90";
 
   if (strstr(args[1], "on")) {
-    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, NOP, 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, "\x90\x90\x90\x90\x90\x90\xFF\x90", 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.InfectedGlowAddr, "\x90\x90\x90\x90\x90\x90\xA1\x7C", 8);
     puts("Turned on esp");
   } else {
-    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, REV, 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, "\x0F\x83\xD1\x01\x00\x00\xFF\x90", 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.InfectedGlowAddr, "\x0F\x83\xBD\x00\x00\x00\xA1\x7C", 8);
     puts("Turned off esp");
   }
 }
