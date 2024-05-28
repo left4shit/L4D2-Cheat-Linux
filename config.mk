@@ -1,4 +1,4 @@
-CC ?= cc
+CC := g++
 
 TARGET  := L4D2Cheat
 VERSION := $(shell head -n 1 VERSION)
