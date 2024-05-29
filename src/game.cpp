@@ -48,9 +48,9 @@ void openGame(Game *game, char *name) {
 
   /* @TODO: replace with sigs */
   game->offsets.PlayerAddr = 0x00EDB3E8; /* LPlr Addr | (c2ce13e8 | xx?x) */
-  game->offsets.GlowAddr = 0x7EE069;     /* Glow Addr */
+  game->offsets.GlowAddr = 0x7EE250;     /* Glow Addr */
+  game->offsets.InfectedGlowAddr = 0x7EE0CD;
   game->offsets.BoomAddr = 0x7F3E75;     /* Boom Addr */
-  game->offsets.InfectedGlowAddr = 0x7EDFF5;
   game->offsets.NoSpread = 0x5262A2;
 }
 

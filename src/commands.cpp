@@ -27,16 +27,13 @@ void bhopDelay(Game * game, char ** args) {
 
 /* Handle the glow command */
 void toggleEsp(Game *game, char ** args) {
-  const char *NOP = "\x90\x90\x90\x90\x90\x90\xFF\x90";
-  const char *REV = "\x0F\x83\xD1\x01\x00\x00\xFF\x90";
-
   if (strstr(args[1], "on")) {
-    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, "\x90\x90\x90\x90\x90\x90\xFF\x90", 8);
-    ptraceWrite(game->pid, game->ClientModule + game->offsets.InfectedGlowAddr, "\x90\x90\x90\x90\x90\x90\xA1\x7C", 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, "\x0F\x84\x2F\xFE\xFF\xFF\x0F\xB6", 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.InfectedGlowAddr, "\x75\xB6\x90\x90\x90\x90\xA1\xDC", 8);
     puts("Turned on esp");
   } else {
-    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, "\x0F\x83\xD1\x01\x00\x00\xFF\x90", 8);
-    ptraceWrite(game->pid, game->ClientModule + game->offsets.InfectedGlowAddr, "\x0F\x83\xBD\x00\x00\x00\xA1\x7C", 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.GlowAddr, "\x0F\x84\x7E\xFC\xFF\xFF\x0F\xB6", 8);
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.InfectedGlowAddr, "\x0F\x84\xE4\x01\x00\x00\xA1\xDC", 8);
     puts("Turned off esp");
   }
 }
