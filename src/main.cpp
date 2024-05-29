@@ -46,19 +46,6 @@ int main(void)
 /* Main cheat thread */
 static void *mainThread(void *_)
 {
-  std::string signature = "C8 4B ?? ?? C0 F2 ?? ?? 01 00 00 00 28 88 ?? ?? 70 8C ?? ?? 0A 40 00 00 30 DE ?? ?? C0 37 ?? ?? 02 ?? ?? ??";
-  u_int32_t result = sigScan(game.pid, game.ClientModuleEnd, game.EngineModule, signature);
-  u_int32_t forceJumpAddress;
-  if (result == -1)
-  {
-    die("forceJumpAddress signature not found");
-  }
-  else
-  {
-    forceJumpAddress = result - 0xA0;
-    std::cout << "forceJumpAddress signature found at address: " << std::hex << forceJumpAddress << std::endl;
-  }
-
   (void)_; /* ignoring extra thread arg */
   int key, keyF, uinputF;
 
@@ -83,13 +70,13 @@ static void *mainThread(void *_)
 
       // if (!game.options.BhopDelay || rand() % 50 <= 10) {
       //  Do the bhop faggot
-      ptraceWrite(game.pid, forceJumpAddress, "\x05", 1);
+      ptraceWrite(game.pid, game.ClientModule + game.offsets.ForceJump, "\x05", 1);
       usleep(10000);
       //}
     }
     else
     {
-      ptraceWrite(game.pid, forceJumpAddress, "\x04", 1);
+      ptraceWrite(game.pid, game.ClientModule + game.offsets.ForceJump, "\x04", 1);
     }
 
     // sleep(1);
