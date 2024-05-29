@@ -71,7 +71,7 @@ static void *mainThread(void *_)
       // if (!game.options.BhopDelay || rand() % 50 <= 10) {
       //  Do the bhop faggot
       ptraceWrite(game.pid, game.ClientModule + game.offsets.ForceJump, "\x05", 1);
-      usleep(10000);
+      usleep(100000);
       //}
     }
     else
