@@ -14,6 +14,7 @@ typedef struct {
   u_int32_t GlowAddr;   /* The static address of where to nop for Glow */
   u_int32_t InfectedGlowAddr;   /* The static address of where to nop for Infected Glow */
   u_int32_t BoomAddr;   /* The static address of where to nop for Noboom */
+  u_int32_t NoSpread;
 } Offsets;
 
 typedef struct {

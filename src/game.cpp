@@ -51,6 +51,7 @@ void openGame(Game *game, char *name) {
   game->offsets.GlowAddr = 0x7EE069;     /* Glow Addr */
   game->offsets.BoomAddr = 0x7F3E75;     /* Boom Addr */
   game->offsets.InfectedGlowAddr = 0x7EDFF5;
+  game->offsets.NoSpread = 0x5262A2;
 }
 
 /* Checks if the LocalPlayer exists */

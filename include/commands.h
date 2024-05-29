@@ -17,5 +17,6 @@ void bhopDelay(Game *, char **);
 void toggleEsp(Game *, char **);
 /* Handle the noboom command */
 void toggleNoBoom(Game *, char **);
+void toggleNoSpread(Game *, char **);
 
 #endif /* _COMMANDS_H */

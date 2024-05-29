@@ -54,3 +54,13 @@ void toggleNoBoom(Game *game, char ** args) {
     puts("Turned off no-boom");
   }
 }
+
+void toggleNoSpread(Game* game, char ** args) {
+  if (strstr(args[1], "on")) {
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.NoSpread, "\xC7\x86\xF0\x0C\x00\x00\x00\x00\x00\x00\x90\x8B", 12);
+    puts("Turned on no-spread");
+  } else {
+    ptraceWrite(game->pid, game->ClientModule + game->offsets.NoSpread, "\xF3\x0F\x11\x86\xF0\x0C\x00\x00\x8B\x78\x30\x8B", 12);
+    puts("Turned off no-spread");
+  }
+}

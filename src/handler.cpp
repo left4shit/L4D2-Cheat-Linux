@@ -15,6 +15,7 @@ static Command commands[] = {
     {"bhopdelay", &bhopDelay},
     {"glow", &toggleEsp},
     {"noboom", &toggleNoBoom},
+    {"nospread", &toggleNoSpread},
 };
 
 static Toggle Toggles[] = {
